@@ -3,23 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--    <item-->
-<!--        android:id="@+id/action_delete"-->
-<!--        android:orderInCategory="100"-->
-<!--        android:title="удалить"-->
-<!--        android:onClick="deleteContact"-->
-<!--        app:showAsAction="never"/>-->
-<!--    <item-->
-<!--        android:id="@+id/action_back"-->
-<!--        android:orderInCategory="10"-->
-<!--        app:showAsAction="always"-->
-<!--        android:icon="@drawable/ic_arrow_back_white_24dp"-->
-<!--        android:title="TODO" />-->
-    <item
+    <!--        android:id="@+id/action_delete"-->
+    <!--        android:orderInCategory="100"-->
+    <!--        android:title="удалить"-->
+    <!--        android:onClick="deleteContact"-->
+    <!--        app:showAsAction="never"/>-->
+
+    <item xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/action_search"
-        android:title="search"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:actionViewClass="android.widget.SearchView"
         android:icon="@drawable/ic_search_white_24dp"
         android:orderInCategory="100"
-        app:showAsAction="always"/>
+        android:title="search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
 </menu>

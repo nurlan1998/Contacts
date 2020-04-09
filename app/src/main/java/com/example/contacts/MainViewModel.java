@@ -23,15 +23,15 @@ public class MainViewModel extends AndroidViewModel {
         return contacts;
     }
 
-    public void insertContact(Contact contact){
+    public void insertContact(Contact contact) {
         new InsertTask().execute(contact);
     }
 
-    private static class InsertTask extends AsyncTask<Contact,Void,VerifyError>{
+    private static class InsertTask extends AsyncTask<Contact, Void, VerifyError> {
 
         @Override
         protected VerifyError doInBackground(Contact... contacts) {
-            if(contacts != null && contacts.length > 0){
+            if (contacts != null && contacts.length > 0) {
                 database.contactDao().insertContact(contacts[0]);
             }
             return null;

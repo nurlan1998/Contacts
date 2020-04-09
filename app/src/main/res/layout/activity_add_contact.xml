@@ -2,69 +2,77 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:weightSum="5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="5"
     tools:context=".AddContactActivity">
 
     <ImageView
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/iconPeople"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <EditText
             android:id="@+id/edFirstName"
-            android:hint="Имя"
-            android:layout_weight="5"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="Имя" />
     </LinearLayout>
+
     <EditText
         android:id="@+id/edLastName"
-        android:hint="Фамилия"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:hint="Фамилия" />
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/iconPhone"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
         <EditText
             android:id="@+id/edPhoneNumber"
-            android:hint="Номер"
-            android:inputType="phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:hint="Номер"
+            android:inputType="phone" />
+
         <TextView
-            android:text="Мобильный"
-            android:textSize="15sp"
-            android:layout_weight="2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Мобильный"
+            android:textSize="15sp" />
     </LinearLayout>
+
     <Button
         android:id="@+id/btnAdd"
-        android:onClick="onClickSaveContact"
-        android:text="AddContact"
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="onClickSaveContact"
+        android:text="AddContact" />
 
 </LinearLayout>

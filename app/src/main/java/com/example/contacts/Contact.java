@@ -20,7 +20,6 @@ public class Contact {
     }
 
 
-
     public int getId() {
         return id;
     }

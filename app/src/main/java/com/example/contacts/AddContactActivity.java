@@ -37,18 +37,19 @@ public class AddContactActivity extends AppCompatActivity {
         String lastName = edLastName.getText().toString().trim();
         String phoneNumber = edPoneNumber.getText().toString().trim();
 
-        if(isFilled(firstName,lastName)){
-            Contact contact = new Contact(firstName,lastName,phoneNumber);
-            Log.d("result",firstName + lastName);
+        if (isFilled(firstName, lastName)) {
+            Contact contact = new Contact(firstName, lastName, phoneNumber);
+            Log.d("result", firstName + lastName);
             viewModel.insertContact(contact);
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        }else {
+        } else {
             Toast.makeText(this, "поля не заполнены", Toast.LENGTH_SHORT).show();
         }
     }
-    private boolean isFilled(String fistName, String lastName){
+
+    private boolean isFilled(String fistName, String lastName) {
         return !fistName.isEmpty() && !lastName.isEmpty();
     }
 }

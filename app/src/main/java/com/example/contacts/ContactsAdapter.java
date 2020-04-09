@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,14 +18,12 @@ import java.util.List;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> implements Filterable {
 
-    List<Contact> contacts,filterList;
-    CustomFilter filter;
-
+    List<Contact> contacts, contactListFiltered;
     Context context;
 
-    public ContactsAdapter(List<Contact> contacts,Context context) {
+    public ContactsAdapter(List<Contact> contacts, Context context) {
         this.contacts = contacts;
-        this.filterList = filterList;
+        this.contactListFiltered = contactListFiltered;
         this.context = context;
         notifyDataSetChanged();
     }
@@ -33,7 +31,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     @NonNull
     @Override
     public ContactsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_item, parent, false);
         return new ContactsViewHolder(view);
     }
 
@@ -47,21 +45,47 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     @Override
     public int getItemCount() {
-        if(contacts == null) return 0;
+        if (contacts == null) return 0;
         return contacts.size();
     }
 
     @Override
     public Filter getFilter() {
-        if(filter == null){
-            filter = new CustomFilter(this,filterList);
-        }
-        return filter;
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    contactListFiltered = contacts;
+                } else {
+                    List<Contact> filteredList = new ArrayList<>();
+                    for (Contact row : contacts) {
+                        if (row.getContactFirstName().toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+                    }
+                    contacts = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filterResults;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                if (results != null && results.count > 0) {
+                    contactListFiltered = (List<Contact>) results.values;
+                    notifyDataSetChanged();
+                } else {
+                    notifyDataSetChanged();
+                }
+            }
+        };
     }
 
     class ContactsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-//        private ImageView ivImageContacts;
+        //        private ImageView ivImageContacts;
         private TextView tvFirstNameContacts;
         private TextView tvLastNameContacts;
 
@@ -78,7 +102,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
             int position = getAdapterPosition();
             Contact contact = contacts.get(position);
 
-            Intent intent = new Intent(itemView.getContext(),DetailContactActivity.class);
+            Intent intent = new Intent(itemView.getContext(), DetailContactActivity.class);
             intent.putExtra("firstName", contact.getContactFirstName());
             intent.putExtra("phoneNumber", contact.getContactPhone());
             itemView.getContext().startActivity(intent);
