@@ -5,21 +5,29 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> {
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> implements Filterable {
 
-    private List<Contact> contacts;
+    List<Contact> contacts,filterList;
+    CustomFilter filter;
+
     Context context;
 
-    public ContactsAdapter(List<Contact> contacts) {
+    public ContactsAdapter(List<Contact> contacts,Context context) {
         this.contacts = contacts;
+        this.filterList = filterList;
+        this.context = context;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -39,7 +47,16 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     @Override
     public int getItemCount() {
+        if(contacts == null) return 0;
         return contacts.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        if(filter == null){
+            filter = new CustomFilter(this,filterList);
+        }
+        return filter;
     }
 
     class ContactsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -67,5 +84,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
             itemView.getContext().startActivity(intent);
         }
     }
+
 
 }
