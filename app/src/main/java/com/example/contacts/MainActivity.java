@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
-            actionBar.hide();
+            actionBar.setTitle("Контакты");
         }
         getData();
         adapter = new ContactsAdapter(contacts);

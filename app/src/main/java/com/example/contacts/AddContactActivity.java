@@ -42,6 +42,7 @@ public class AddContactActivity extends AppCompatActivity {
             Log.d("result",firstName + lastName);
             viewModel.insertContact(contact);
             Intent intent = new Intent(this,MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }else {
             Toast.makeText(this, "поля не заполнены", Toast.LENGTH_SHORT).show();

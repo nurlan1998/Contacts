@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark"
+    android:padding="8dp"
+    android:background="#3e2723"
     android:orientation="vertical"
     tools:context=".DetailContactActivity">
 
@@ -76,6 +77,8 @@
 
             <TextView
                 android:id="@+id/tvName"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -98,6 +101,8 @@
 
             <TextView
                 android:id="@+id/tvPhoneNumber"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

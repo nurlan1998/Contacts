@@ -1,9 +1,12 @@
 package com.example.contacts;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class DetailContactActivity extends AppCompatActivity {
@@ -22,5 +25,7 @@ public class DetailContactActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tvFirstName.setText(intent.getStringExtra("firstName"));
         tvPhoneNumber.setText(intent.getStringExtra("phoneNumber"));
+
+
     }
 }
