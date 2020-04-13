@@ -3,6 +3,7 @@ package com.example.contacts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -20,7 +21,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
-import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,22 +38,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Контакты");
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle("Контакты");
-        }
+//        if (actionBar != null) {
+//            actionBar.setTitle("Контакты");
+//        }
         getData();
-        adapter = new ContactsAdapter(contacts, this);
+        adapter = new ContactsAdapter(this, contacts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
         whiteNotificationBar(recyclerView);
-
     }
 
     private void getData() {
@@ -110,12 +113,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     public void onBackPressed() {
         if (!searchView.isIconified()) {
             searchView.setIconified(true);
-            return;
+        }else {
+            super.onBackPressed();
         }
-        super.onBackPressed();
     }
 
     private void whiteNotificationBar(View view) {
@@ -126,5 +135,4 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.WHITE);
         }
     }
-
 }

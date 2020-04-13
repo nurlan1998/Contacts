@@ -21,11 +21,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     List<Contact> contacts, contactListFiltered;
     Context context;
 
-    public ContactsAdapter(List<Contact> contacts, Context context) {
+    public ContactsAdapter(Context context, List<Contact> contacts) {
         this.contacts = contacts;
-        this.contactListFiltered = contactListFiltered;
+        this.contactListFiltered = contacts;
         this.context = context;
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -46,7 +45,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     @Override
     public int getItemCount() {
         if (contacts == null) return 0;
-        return contacts.size();
+        return contactListFiltered.size();
     }
 
     @Override
@@ -64,21 +63,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
                             filteredList.add(row);
                         }
                     }
-                    contacts = filteredList;
+                    contactListFiltered = filteredList;
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = filterResults;
+                filterResults.values = contactListFiltered;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                if (results != null && results.count > 0) {
-                    contactListFiltered = (List<Contact>) results.values;
+                    contactListFiltered = (ArrayList<Contact>) results.values;
                     notifyDataSetChanged();
-                } else {
-                    notifyDataSetChanged();
-                }
             }
         };
     }
