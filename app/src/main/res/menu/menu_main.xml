@@ -17,5 +17,10 @@
         android:orderInCategory="100"
         android:title="search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item android:id="@+id/action_share"
+        android:title="share"
+        app:showAsAction="ifRoom"
+        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"/>
 </menu>

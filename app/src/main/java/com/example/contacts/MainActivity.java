@@ -1,7 +1,6 @@
 package com.example.contacts;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,16 +38,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Контакты");
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setTitle("Контакты");
-//        }
         getData();
         adapter = new ContactsAdapter(this, contacts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -85,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 .getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setIconified(false);
+        searchView.setQueryHint("Search People");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -113,16 +107,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    @Override
     public void onBackPressed() {
         if (!searchView.isIconified()) {
             searchView.setIconified(true);
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
